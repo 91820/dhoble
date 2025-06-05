@@ -24,7 +24,7 @@
       object-fit: cover; pointer-events: none;
     }
     .d0-wrap-overlay-soft { z-index: 2; mix-blend-mode: soft-light; opacity: 10%; }
-    .d0-wrap-overlay-ira { z-index: 2; mix-blend-mode: hard-light; opacity: 5%; }
+    .d0-wrap-overlay-ira { z-index: 2; mix-blend-mode: soft-light; opacity: 5%; }
     .d0-wrap {
       width: 100vw; height: 100vh;
       display: flex; flex-direction: column;
@@ -51,6 +51,10 @@
       font-size: 56px; font-family: 'Alex Brush', cursive;
     }
     .p-landing { width: 100%; text-align: center; font-family: 'Koh Santepheap', serif; }
+    ::selection {
+      background: #252933;
+      color: #F2F2F7;
+    }
   </style>
 </head>
 <body class="d0-default">

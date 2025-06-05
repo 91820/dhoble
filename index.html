@@ -17,18 +17,27 @@
         overflow: hidden;
         position: relative;
       }
-      .d0-wrap-overlay-soft {
+      .d0-wrap-overlay-soft,
+      .d0-wrap-overlay-ira {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100vw;
         height: 100vh;
-        position: absolute;
+        min-width: 100vw;
+        min-height: 100vh;
+        max-width: none;
+        max-height: none;
+        object-fit: cover;
+        pointer-events: none;
+        /* z-index and blend/opacity set below */
+      }
+      .d0-wrap-overlay-soft {
         z-index: 2;
         mix-blend-mode: soft-light;
         opacity: 10%;
       }
       .d0-wrap-overlay-ira {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
         z-index: 2;
         mix-blend-mode: hard-light;
         opacity: 5%;
@@ -144,8 +153,8 @@
       <ellipse cx="380" cy="200" rx="90" ry="60" fill="url(#luxuryAccent)" opacity="0.22"/>
     </svg>
   </div>
-  <img class="d0-wrap-overlay-soft" src="https://github.com/91820/dhoble/raw/9b4f51b3a84ad30e92229acae7197c4e0869b87b/assets/di-AlphaOverlay.png" alt="Overlay Image" style="max-width: 100%; height: auto;" />
-  <img class="d0-wrap-overlay-ira" src="https://github.com/91820/dhoble/raw/bbfb996209f2fe96587543bdae4731f94af6a6be/assets/di-AlphaOverlay-Iradescent.png" alt="Iridescent Overlay" style="max-width: 100%; height: auto;" />
+  <img class="d0-wrap-overlay-soft" src="https://github.com/91820/dhoble/raw/9b4f51b3a84ad30e92229acae7197c4e0869b87b/assets/di-AlphaOverlay.png" alt="Overlay Image" />
+  <img class="d0-wrap-overlay-ira" src="https://github.com/91820/dhoble/raw/bbfb996209f2fe96587543bdae4731f94af6a6be/assets/di-AlphaOverlay-Iradescent.png" alt="Iridescent Overlay" />
   <div class="d0-wrap">
     <div class="d1-head">
       <svg class="dsvg" width="100%" height="100%" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -445,6 +454,27 @@
           holoRect1.setAttribute('height', window.innerHeight);
         }
       }
+      // Also update overlay images to always fill viewport
+      const overlaySoft = document.querySelector('.d0-wrap-overlay-soft');
+      const overlayIra = document.querySelector('.d0-wrap-overlay-ira');
+      [overlaySoft, overlayIra].forEach(img => {
+        if (img) {
+          img.style.width = window.innerWidth + 'px';
+          img.style.height = window.innerHeight + 'px';
+        }
+      });
+    });
+
+    // On initial load, set overlay images to fill viewport
+    window.addEventListener('DOMContentLoaded', () => {
+      const overlaySoft = document.querySelector('.d0-wrap-overlay-soft');
+      const overlayIra = document.querySelector('.d0-wrap-overlay-ira');
+      [overlaySoft, overlayIra].forEach(img => {
+        if (img) {
+          img.style.width = window.innerWidth + 'px';
+          img.style.height = window.innerHeight + 'px';
+        }
+      });
     });
 
     // Accessibility: reduce motion

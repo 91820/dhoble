@@ -42,6 +42,7 @@
       background-color: var(--bg-primary);
       z-index: 100;
       box-shadow: 0 1px 6px var(--shadow-color);
+      flex-direction: column;
     }
 
     .search-header .logo {
@@ -148,13 +149,36 @@
     footer a:hover {
       color: var(--text-primary);
     }
-
-    @media (max-width: 600px) {
+    
+    .default-1 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0.75rem;
+      width: 100%;
+      min-width: 728px;
+      max-width: 85%;
+    }
+    @media (max-width: 991px) {
+        min-width: 728px;
+        max-width: 90%;
+    }
+    @media (max-width: 728px) {
       .search-header {
         flex-direction: column;
         align-items: flex-start;
         padding: 0.75rem;
       }
+      
+      .default-1 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0.75rem;
+      width: 100%;
+      min-width: auto;
+      max-width: 95%%;
+    }
       
       .search-header .logo {
         margin-bottom: 0.75rem;
@@ -182,7 +206,9 @@
   </style>
 </head>
 <body>
+
   <div class="search-header">
+    <div class="default-1">
     <div class="logo">
       <svg class="dsvg" width="48" height="48" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- ...SVG content unchanged... -->
@@ -204,8 +230,8 @@
       </svg>
       <input type="text" placeholder="Discover" autocomplete="on" spellcheck="true">
     </div>
+      </div>
   </div>
-
   <div class="content">
     <!-- Content will go here -->
   </div>

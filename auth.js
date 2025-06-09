@@ -2,7 +2,7 @@ console.log('Script loaded');
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB1Ic4I-4rmN9Xsc5zEB4Idu1fzAq8ANPs",
+  apiKey: "",
   authDomain: "dhoble-bd426.firebaseapp.com",
   projectId: "dhoble-bd426",
   storageBucket: "dhoble-bd426.firebasestorage.app",

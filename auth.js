@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       console.log('Querying Firestore...');
       // Query Firestore for valid password
-      const querySnapshot = await db.collection('validPasswords')
+      const querySnapshot = await db.collection('validAuth')
         .where('password', '==', enteredPassword)
         .where('active', '==', true)
         .get();

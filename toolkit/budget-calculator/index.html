@@ -1,1 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monthly Budget Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --accent-primary: #0ea5e9;
+      --accent-secondary: #06b6d4;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .app-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .app-title {
+      font-size: 3rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    .app-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgb(14 165 233 / 0.1);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-primary);
+      color: white;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+      border: 1px solid var(--accent-primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient);
+    }
+
+    .balance-display {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .balance-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgb(0 0 0 / 0.3);
+    }
+
+    .balance-label {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .expense-item:last-child {
+      border-bottom: none;
+    }
+
+    .expense-amount {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    .entry-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 0.5rem;
+      align-items: end;
+      margin-bottom: 0.75rem;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    .entry-row .form-input {
+      margin-bottom: 0;
+    }
+
+    .btn-remove {
+      padding: 0.5rem;
+      background: var(--danger);
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      height: fit-content;
+    }
+
+    .section-separator {
+      grid-column: 1 / -1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 1rem 0;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .credit-card {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .credit-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .card-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .utilization-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .utilization-fill {
+      height: 100%;
+      background: white;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      .app-title {
+        font-size: 2rem;
+      }
+      
+      .balance-amount {
+        font-size: 2rem;
+      }
+      
+      .entry-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="app-header">
+      <h1 class="app-title">Budget Pro</h1>
+      <p class="app-subtitle">Take control of your financial future</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Income Setup</div>
+      <div class="form-group">
+        <label class="form-label" for="incomeInput">Monthly Income</label>
+        <input type="number" id="incomeInput" class="form-input" placeholder="Enter your monthly income" />
+      </div>
+    </div>
+
+    <div class="card summary-card">
+      <div class="balance-display">
+        <div class="balance-amount" id="remaining">$0.00</div>
+        <div class="balance-label">Available Budget</div>
+      </div>
+      <div id="expenseBreakdown"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Fixed Expenses</div>
+      <div id="fixedExpenses"></div>
+      <button class="btn btn-block" onclick="addFixedExpense()">+ Add Fixed Expense</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Variable Expenses</div>
+      <div id="variableExpenses"></div>
+      <button class="btn btn-block" onclick="addVariableExpense()">+ Add Variable Expense</button>
+    </div>
+
+    <div class="card" style="grid-column: 1 / -1;">
+      <div class="card-title">Credit Card Management</div>
+      <div id="cardInputs"></div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+        <button class="btn" onclick="addCreditCardEntry()">+ Add Credit Card</button>
+        <button class="btn btn-outline" onclick="calculateAllCredit()">Calculate Impact</button>
+        <button class="btn btn-outline" onclick="suggestPayments()">Optimize Payments</button>
+      </div>
+      <div id="creditAnalysis"></div>
+    </div>
+
+    <div class="card" style="grid-column: 1 / -1;" id="analysisCard">
+      <div class="card-title">Financial Analysis</div>
+      <div id="analysis"></div>
+    </div>
+  </div>
+
+  <script>
+    let income = 0;
+    const incomeInput = document.getElementById("incomeInput");
+    const remainingDisplay = document.getElementById("remaining");
+    const expenseBreakdown = document.getElementById("expenseBreakdown");
+    const analysis = document.getElementById("analysis");
+    const creditAnalysis = document.getElementById("creditAnalysis");
+
+    incomeInput.addEventListener("input", () => {
+      income = parseFloat(incomeInput.value) || 0;
+      updateRemaining();
+    });
+
+    function addFixedExpense() { createExpenseEntry("fixed"); }
+    function addVariableExpense() { createExpenseEntry("variable"); }
+
+    function createExpenseEntry(type) {
+      const container = document.getElementById(type + "Expenses");
+      const div = document.createElement("div");
+      div.className = "entry-row";
+      div.innerHTML = `
+        <input type="text" class="form-input" placeholder="Expense name" />
+        <input type="number" class="form-input" placeholder="Amount" oninput="updateRemaining()" />
+        <button class="btn btn-remove" onclick="this.parentElement.remove(); updateRemaining();">✕</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function updateRemaining() {
+      let fixedTotal = 0, variableTotal = 0, cardPayments = 0;
+      
+      document.querySelectorAll("#fixedExpenses input[type='number']").forEach(i => 
+        fixedTotal += parseFloat(i.value) || 0
+      );
+      document.querySelectorAll("#variableExpenses input[type='number']").forEach(i => 
+        variableTotal += parseFloat(i.value) || 0
+      );
+      document.querySelectorAll(".card-payment").forEach(i => 
+        cardPayments += parseFloat(i.value) || 0
+      );
+
+      const remaining = income - fixedTotal - variableTotal - cardPayments;
+      remainingDisplay.textContent = `$${remaining.toFixed(2)}`;
+      remainingDisplay.style.color = remaining >= 0 ? 'var(--success)' : 'var(--danger)';
+      
+      renderExpenseBreakdown(fixedTotal, variableTotal, cardPayments);
+      renderAnalysis(fixedTotal, variableTotal, cardPayments, remaining);
+    }
+
+    function renderExpenseBreakdown(fixed, variable, credit) {
+      expenseBreakdown.innerHTML = '';
+      
+      const expenses = [
+        { label: 'Fixed Expenses', amount: fixed },
+        { label: 'Variable Expenses', amount: variable },
+        { label: 'Credit Payments', amount: credit }
+      ].filter(exp => exp.amount > 0);
+
+      expenses.forEach(exp => {
+        const div = document.createElement('div');
+        div.className = 'expense-item';
+        div.innerHTML = `
+          <span>${exp.label}</span>
+          <span class="expense-amount">-$${exp.amount.toFixed(2)}</span>
+        `;
+        expenseBreakdown.appendChild(div);
+      });
+    }
+
+    function renderAnalysis(fixed, variable, credit, remaining) {
+      if (!income) {
+        analysis.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Enter your income to see analysis</p>';
+        return;
+      }
+
+      const totalSpent = fixed + variable + credit;
+      const savingsRate = income > 0 ? ((remaining / income) * 100) : 0;
+      
+      analysis.innerHTML = `
+        <div class="analysis-grid">
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--accent-primary)">$${totalSpent.toFixed(2)}</div>
+            <div class="stat-label">Total Spent</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: ${remaining >= 0 ? 'var(--success)' : 'var(--danger)'}">$${remaining.toFixed(2)}</div>
+            <div class="stat-label">Remaining</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: ${savingsRate >= 20 ? 'var(--success)' : savingsRate >= 10 ? 'var(--warning)' : 'var(--danger)'}">${savingsRate.toFixed(1)}%</div>
+            <div class="stat-label">Savings Rate</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function addCreditCardEntry() {
+      const container = document.getElementById("cardInputs");
+      const div = document.createElement("div");
+      div.className = "credit-card";
+      div.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <input type="text" class="card-name form-input" placeholder="Card Name" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; flex: 1; margin-right: 0.5rem;" />
+          <button class="btn btn-remove" onclick="this.parentElement.parentElement.remove(); updateRemaining();" style="background: rgba(255,255,255,0.2);">✕</button>
+        </div>
+        <div class="card-info">
+          <div>
+            <input type="number" class="card-balance form-input" placeholder="Balance" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;" />
+          </div>
+          <div>
+            <input type="number" class="card-limit form-input" placeholder="Limit" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;" />
+          </div>
+          <div>
+            <input type="number" class="card-payment form-input" placeholder="Payment" oninput="updateRemaining()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;" />
+          </div>
+        </div>
+        <div class="utilization-bar">
+          <div class="utilization-fill" style="width: 0%"></div>
+        </div>
+        <div class="card-stats" style="font-size: 0.75rem; opacity: 0.8;"></div>
+      `;
+      container.appendChild(div);
+    }
+
+    function calculateAllCredit() {
+      const cards = document.querySelectorAll(".credit-card");
+      let totalBalance = 0, totalLimit = 0, totalPayment = 0;
+
+      cards.forEach((card, index) => {
+        const name = card.querySelector(".card-name").value || `Card ${index + 1}`;
+        const balance = parseFloat(card.querySelector(".card-balance").value) || 0;
+        const limit = parseFloat(card.querySelector(".card-limit").value) || 0;
+        const payment = parseFloat(card.querySelector(".card-payment").value) || 0;
+        const newBalance = Math.max(0, balance - payment);
+        const utilization = limit > 0 ? (newBalance / limit) * 100 : 0;
+
+        totalBalance += newBalance;
+        totalLimit += limit;
+        totalPayment += payment;
+
+        // Update utilization bar
+        const utilizationBar = card.querySelector(".utilization-fill");
+        const statsDiv = card.querySelector(".card-stats");
+        utilizationBar.style.width = Math.min(utilization, 100) + "%";
+        utilizationBar.style.background = utilization > 30 ? 'var(--danger)' : utilization > 10 ? 'var(--warning)' : 'var(--success)';
+        
+        statsDiv.innerHTML = `${name} • Balance: $${newBalance.toFixed(2)} • Utilization: ${utilization.toFixed(1)}%`;
+      });
+
+      const overallUtilization = totalLimit > 0 ? (totalBalance / totalLimit) * 100 : 0;
+      
+      creditAnalysis.innerHTML = `
+        <div class="analysis-grid" style="margin-top: 1rem;">
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--accent-primary)">$${totalBalance.toFixed(2)}</div>
+            <div class="stat-label">Total Balance</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--text-secondary)">$${totalPayment.toFixed(2)}</div>
+            <div class="stat-label">Total Payments</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: ${overallUtilization > 30 ? 'var(--danger)' : overallUtilization > 10 ? 'var(--warning)' : 'var(--success)'}">${overallUtilization.toFixed(1)}%</div>
+            <div class="stat-label">Overall Utilization</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function suggestPayments() {
+      const balances = document.querySelectorAll(".card-balance");
+      const limits = document.querySelectorAll(".card-limit");
+      const payments = document.querySelectorAll(".card-payment");
+
+      let totalRequired = 0;
+      let suggestions = [];
+
+      for (let i = 0; i < balances.length; i++) {
+        const balance = parseFloat(balances[i].value) || 0;
+        const limit = parseFloat(limits[i].value) || 0;
+        const target = Math.max(0, balance - 0.3 * limit);
+        suggestions.push({ index: i, target });
+        totalRequired += target;
+      }
+
+      const fixed = Array.from(document.querySelectorAll("#fixedExpenses input[type='number']"))
+        .reduce((a, i) => a + (parseFloat(i.value) || 0), 0);
+      const variable = Array.from(document.querySelectorAll("#variableExpenses input[type='number']"))
+        .reduce((a, i) => a + (parseFloat(i.value) || 0), 0);
+      const available = income - fixed - variable;
+
+      if (available < totalRequired) {
+        suggestions = suggestions.map(s => ({ 
+          ...s, 
+          target: totalRequired > 0 ? (s.target / totalRequired) * Math.max(0, available) : 0 
+        }));
+      }
+
+      suggestions.forEach(s => {
+        payments[s.index].value = s.target.toFixed(2);
+      });
+      
+      updateRemaining();
+      calculateAllCredit();
+    }
+
+    // Initialize
+    updateRemaining();
+  </script>
+</body>
+</html>

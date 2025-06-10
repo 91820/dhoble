@@ -24,6 +24,36 @@
       font-family: 'Roboto', sans-serif;
     }
 
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8a8087;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: var(--bg-primary);
+    }
+
+    /* Firefox scrollbar */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-color) var(--bg-primary);
+    }
+
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
@@ -220,10 +250,14 @@
       min-width: 728px;
       max-width: 85%;
     }
+
     @media (max-width: 991px) {
+      .default-1 {
         min-width: 728px;
         max-width: 90%;
+      }
     }
+
     @media (max-width: 728px) {
       .search-header {
         flex-direction: column;
@@ -232,14 +266,14 @@
       }
       
       .default-1 {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      padding: 0.75rem;
-      width: 100%;
-      min-width: auto;
-      max-width: 95%%;
-    }
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0.75rem;
+        width: 100%;
+        min-width: auto;
+        max-width: 95%;
+      }
       
       .search-header .logo {
         margin-bottom: 0.75rem;
@@ -309,8 +343,8 @@
     // Sample data for site pages - in a real implementation, this would come from your backend
     const sitePages = [
       { title: "Home", url: "/", type: "Page", description: "Welcome to The Family" },
-      { title: "Dashboard", url: "/welcome", type: "Page", description: "Search for what you need." },
-      { title: "Budget Calculator", url: "/toolkit/budget-calculator/", type: "Page", description: "Calculate income vs expenses" },
+      { title: "About Us", url: "/about", type: "Page", description: "Learn about our company" },
+      { title: "Services", url: "/services", type: "Page", description: "Our professional services" },
       { title: "Contact", url: "/contact", type: "Page", description: "Get in touch with us" },
       { title: "Blog", url: "/blog", type: "Page", description: "Latest news and updates" },
       { title: "Portfolio", url: "/portfolio", type: "Page", description: "Our work showcase" },
@@ -440,20 +474,28 @@
       const url = suggestionElement.dataset.url;
       const title = suggestionElement.dataset.title;
       
-      // In a real implementation, you would navigate to the page
-      // For demo purposes, we'll just show an alert
-      alert(`Navigating to: ${title} (${url})`);
-      
       searchInput.value = title;
       hideSuggestions();
       
-      // Uncomment the next line for actual navigation
-      // window.location.href = url;
+      // Navigate to the page
+      window.location.href = url;
     }
 
     function performSearch(query) {
       // In a real implementation, this would perform a site-wide search
-      alert(`Searching for: "${query}"`);
+      // For now, redirect to a search results page or the first matching result
+      const matchingPage = sitePages.find(page => 
+        page.title.toLowerCase().includes(query.toLowerCase()) ||
+        page.description.toLowerCase().includes(query.toLowerCase())
+      );
+      
+      if (matchingPage) {
+        window.location.href = matchingPage.url;
+      } else {
+        // Redirect to a search results page with the query
+        window.location.href = `/search?q=${encodeURIComponent(query)}`;
+      }
+      
       hideSuggestions();
     }
 

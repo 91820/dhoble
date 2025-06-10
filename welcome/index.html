@@ -64,6 +64,12 @@
       width: auto;
     }
 
+    .search-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+    }
+
     .search-box {
       display: flex;
       align-items: center;
@@ -71,7 +77,6 @@
       border: 1px solid var(--border-color);
       border-radius: 20px;
       width: 100%;
-      max-width: 500px;
       padding: 0.5rem 0.75rem;
       transition: all 0.2s ease;
       position: relative;
@@ -86,6 +91,10 @@
       border-color: var(--accent-color);
       box-shadow: 0 1px 6px var(--shadow-color);
       background-color: var(--bg-secondary);
+    }
+
+    .search-box:focus-within .suggestions-dropdown {
+      display: block;
     }
 
     .search-box input {
@@ -118,6 +127,58 @@
 
     .search-box:focus-within .search-icon {
       color: var(--accent-color);
+    }
+
+    .suggestions-dropdown {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      display: none;
+      z-index: 1000;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .suggestion-item {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s;
+    }
+
+    .suggestion-item:last-child {
+      border-bottom: none;
+    }
+
+    .suggestion-item:hover,
+    .suggestion-item.selected {
+      background-color: var(--bg-primary);
+    }
+
+    .suggestion-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .suggestion-text {
+      flex: 1;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+    }
+
+    .suggestion-type {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: 0.5rem;
     }
 
     .content {
@@ -220,11 +281,14 @@
       <img class="dsvg-overlay-ira" src="https://github.com/91820/dhoble/blob/main/assets/D%20DHoble%20Pattern.png?raw=true"/>
       
     </div>
-    <div class="search-box">
-      <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-      </svg>
-      <input type="text" placeholder="Discover" autocomplete="on" spellcheck="true">
+    <div class="search-container">
+      <div class="search-box">
+        <svg class="search-icon" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+        </svg>
+        <input type="text" id="search-input" placeholder="Discover" autocomplete="off" spellcheck="true">
+      </div>
+      <div class="suggestions-dropdown" id="suggestions-dropdown"></div>
     </div>
       </div>
   </div>
@@ -240,5 +304,178 @@
       <a href="#">Settings</a>
     </div>
   </footer>
+
+  <script>
+    // Sample data for site pages - in a real implementation, this would come from your backend
+    const sitePages = [
+      { title: "Home", url: "/", type: "Page", description: "Welcome to The Family" },
+      { title: "Dashboard", url: "/welcome", type: "Page", description: "Search for what you need." },
+      { title: "Budget Calculator", url: "/toolkit/budget-calculator/", type: "Page", description: "Calculate income vs expenses" },
+      { title: "Contact", url: "/contact", type: "Page", description: "Get in touch with us" },
+      { title: "Blog", url: "/blog", type: "Page", description: "Latest news and updates" },
+      { title: "Portfolio", url: "/portfolio", type: "Page", description: "Our work showcase" },
+      { title: "Team", url: "/team", type: "Page", description: "Meet our team members" },
+      { title: "Privacy Policy", url: "/privacy", type: "Legal", description: "Privacy and data protection" },
+      { title: "Terms of Service", url: "/terms", type: "Legal", description: "Terms and conditions" },
+      { title: "FAQ", url: "/faq", type: "Support", description: "Frequently asked questions" },
+      { title: "Documentation", url: "/docs", type: "Resource", description: "Technical documentation" },
+      { title: "API Reference", url: "/api", type: "Resource", description: "API documentation" },
+      { title: "Careers", url: "/careers", type: "Page", description: "Join our team" },
+      { title: "News", url: "/news", type: "Page", description: "Latest company news" },
+      { title: "Products", url: "/products", type: "Page", description: "Our product catalog" }
+    ];
+
+    const searchInput = document.getElementById('search-input');
+    const suggestionsDropdown = document.getElementById('suggestions-dropdown');
+    let selectedIndex = -1;
+
+    // Show suggestions when input is focused and has value
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim()) {
+        showSuggestions(searchInput.value);
+      }
+    });
+
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        hideSuggestions();
+      }
+    });
+
+    // Handle input changes
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.trim();
+      if (query) {
+        showSuggestions(query);
+      } else {
+        hideSuggestions();
+      }
+      selectedIndex = -1;
+    });
+
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', (e) => {
+      const suggestions = suggestionsDropdown.children;
+      
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+          updateSelection();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          updateSelection();
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && suggestions[selectedIndex]) {
+            selectSuggestion(suggestions[selectedIndex]);
+          } else if (searchInput.value.trim()) {
+            performSearch(searchInput.value);
+          }
+          break;
+        case 'Escape':
+          hideSuggestions();
+          selectedIndex = -1;
+          break;
+      }
+    });
+
+    function showSuggestions(query) {
+      const filteredPages = sitePages.filter(page => 
+        page.title.toLowerCase().includes(query.toLowerCase()) ||
+        page.description.toLowerCase().includes(query.toLowerCase()) ||
+        page.type.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 8); // Limit to 8 suggestions
+
+      if (filteredPages.length === 0) {
+        hideSuggestions();
+        return;
+      }
+
+      suggestionsDropdown.innerHTML = '';
+      
+      filteredPages.forEach((page, index) => {
+        const suggestionItem = document.createElement('div');
+        suggestionItem.className = 'suggestion-item';
+        suggestionItem.innerHTML = `
+          <svg class="suggestion-icon" viewBox="0 0 24 24" fill="currentColor">
+            ${getIconForType(page.type)}
+          </svg>
+          <div class="suggestion-text">
+            <div>${highlightMatch(page.title, query)}</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">
+              ${page.description}
+            </div>
+          </div>
+          <span class="suggestion-type">${page.type}</span>
+        `;
+        
+        suggestionItem.addEventListener('click', () => selectSuggestion(suggestionItem));
+        suggestionItem.dataset.url = page.url;
+        suggestionItem.dataset.title = page.title;
+        
+        suggestionsDropdown.appendChild(suggestionItem);
+      });
+
+      suggestionsDropdown.style.display = 'block';
+    }
+
+    function hideSuggestions() {
+      suggestionsDropdown.style.display = 'none';
+      selectedIndex = -1;
+    }
+
+    function updateSelection() {
+      const suggestions = suggestionsDropdown.children;
+      Array.from(suggestions).forEach((item, index) => {
+        item.classList.toggle('selected', index === selectedIndex);
+      });
+    }
+
+    function selectSuggestion(suggestionElement) {
+      const url = suggestionElement.dataset.url;
+      const title = suggestionElement.dataset.title;
+      
+      // In a real implementation, you would navigate to the page
+      // For demo purposes, we'll just show an alert
+      alert(`Navigating to: ${title} (${url})`);
+      
+      searchInput.value = title;
+      hideSuggestions();
+      
+      // Uncomment the next line for actual navigation
+      // window.location.href = url;
+    }
+
+    function performSearch(query) {
+      // In a real implementation, this would perform a site-wide search
+      alert(`Searching for: "${query}"`);
+      hideSuggestions();
+    }
+
+    function highlightMatch(text, query) {
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<strong>$1</strong>');
+    }
+
+    function getIconForType(type) {
+      switch (type) {
+        case 'Page':
+          return '<path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />';
+        case 'Legal':
+          return '<path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />';
+        case 'Support':
+          return '<path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" />';
+        case 'Resource':
+          return '<path d="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />';
+        default:
+          return '<path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />';
+      }
+    }
+  </script>
 </body>
 </html>

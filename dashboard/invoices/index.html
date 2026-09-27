@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dhoble</title>
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-dynamic-subset.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-kr-dynamic-subset.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
+    <base href="/">
+
+    <link rel="stylesheet" href="ui/styles/global.css">
+    <link rel="stylesheet" href="ui/styles/utility.css">
+    <link rel="stylesheet" href="ui/styles/toolbar.css">
+    <link rel="stylesheet" href="ui/styles/popup.css">
+    <link rel="stylesheet" href="ui/styles/panel.css">
+    <link rel="stylesheet" href="ui/styles/header.css">
+    <link rel="stylesheet" href="ui/styles/components.css">
+
+    <link rel="stylesheet" href="ui/styles/dashboard.css">
+
+    <link rel="icon" type="image/png" href="/ui/assets/AppClip.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="/ui/assets/AppClip.png">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <main class="layout content-wrapper">
+
+        <div data-module="header"></div>
+
+        <div class="page content-wrapper">
+
+            <div id="createInvoicePanel" class="panel content-wrapper is-open" role="dialog" aria-modal="true"
+                aria-labelledby="createInvoiceTitle" aria-hidden="true">
+                <div class="header">
+                    <div class="container">
+                        <div class="title-wrapper">
+                            <p id="createInvoiceTitle" class="title">Create an Invoice</p>
+                            <div class="toolbar content-wrapper" style="width: min-content; background: transparent;">
+                                <button id="closeCreateInvoicePanel" class="toolbar button warning">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.395 15.5531L8 10.158L2.60496 15.5531C2.31879 15.8392 1.93066 16 1.52595 16C1.12124 16 0.733112 15.8392 0.446941 15.5531C0.16077 15.2669 -7.20314e-07 14.8788 0 14.4741C7.20318e-07 14.0693 0.160769 13.6812 0.446941 13.395L5.84198 8L0.44694 2.60496C0.160769 2.31879 2.7012e-07 1.93066 2.02591e-07 1.52595C1.68826e-07 1.12124 0.160769 0.733111 0.44694 0.44694C0.733111 0.16077 1.12124 1.15926e-06 1.52595 1.19303e-06C1.93066 5.40242e-07 2.31879 0.160769 2.60496 0.44694L8 5.84198L13.395 0.44694C13.6812 0.160769 14.0693 4.50236e-08 14.4741 0C14.8788 -6.75257e-08 15.2669 0.160769 15.5531 0.44694C15.8392 0.73311 16 1.12124 16 1.52595C16 1.93065 15.8392 2.31879 15.5531 2.60496L10.158 8L15.5531 13.395C15.8392 13.6812 16 14.0693 16 14.4741C16 14.8788 15.8392 15.2669 15.5531 15.5531C15.2669 15.8392 14.8788 16 14.4741 16C14.0693 16 13.6812 15.8392 13.395 15.5531Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div id="createInvoicePanelContent" class="panel content">
+
+                        <div class="form-wrapper">
+
+                            <div class="input-block">
+                                <p class="title">Basics</p>
+                                <div class="input-group">
+                                    <div class="wrapper">
+                                        <input placeholder="Line Name">
+                                    </div>
+                                    <div class="wrapper split">
+                                        <input placeholder="Brand">
+                                        <input placeholder="Category">
+                                    </div>
+                                    <div class="wrapper">
+                                        <textarea placeholder="Description" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-block">
+                                <p class="title">Pricing & Cost</p>
+                                <div class="input-group">
+                                    <div class="wrapper split">
+                                        <input placeholder="Unit Cost">
+                                        <input placeholder="Price">
+                                    </div>
+                                    <div class="wrapper">
+                                        <input placeholder="Units Per Box">
+                                    </div>
+                                    <label class="callout-toggle" for="applyExciseTaxToggle">
+                                        <span>Apply Excise Tax?</span>
+                                        <span class="toggle-wrapper">
+                                            <input id="applyExciseTaxToggle" class="toggle-input" type="checkbox"
+                                                role="switch" aria-label="Apply Excise Tax">
+                                            <span class="toggle-control" aria-hidden="true"></span>
+                                        </span>
+                                    </label>
+                                    <div class="callout"
+                                        style="font-size: 12px; color: var(--secondaryText); display: flex; flex-direction: row; align-items: center; gap: 12px;">
+                                        <span>Location Rate:<br><span style="font-weight: 600;">0%</span></span>
+                                        <span>Base Unit Cost:<br><span style="font-weight: 600;">0.00</span></span>
+                                        <span>Excise Addition:<br><span style="font-weight: 600;">0.00</span></span>
+                                        <span>Effective Unit Cost:<br><span style="font-weight: 600;">0.00</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-block">
+                                <p class="title">Variations</p>
+                                <div class="input-group">
+                                    <div class="variation-wrapper">
+                                        <button id="createProductPanel-openVariationPanel" class="button" type="button">
+                                            <div class="details">
+                                                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8 0C8.82843 0 9.5 0.671573 9.5 1.5V6.5H14.5C15.3284 6.5 16 7.17157 16 8C16 8.82843 15.3284 9.5 14.5 9.5H9.5V14.5C9.5 15.3284 8.82843 16 8 16C7.17157 16 6.5 15.3284 6.5 14.5V9.5H1.5C0.671573 9.5 0 8.82843 0 8C0 7.17157 0.671573 6.5 1.5 6.5H6.5V1.5C6.5 0.671573 7.17157 0 8 0Z"
+                                                        fill="currentColor" />
+                                                </svg>
+                                                Add New Variation
+                                            </div>
+                                            <p class="status">Ready</p>
+                                        </button>
+                                        <button id="createProductVariationList" class="button variation-list-toggle"
+                                            type="button" hidden aria-expanded="false"
+                                            aria-controls="createProductVariationItems">
+                                            <div class="details">
+                                                <svg viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16 1.80651C16 2.28563 15.8142 2.74512 15.4834 3.0839L9.24723 9.47088C8.91644 9.80967 8.4678 10 8 10C7.5322 10 7.08355 9.80967 6.75277 9.47088L0.516618 3.0839C0.185832 2.74512 -9.99079e-08 2.28563 -7.89651e-08 1.80651C-5.80222e-08 1.32739 0.185832 0.867898 0.516618 0.529111C0.847404 0.190325 1.29605 -6.4273e-07 1.76385 -6.22282e-07C2.23165 -6.01834e-07 2.68029 0.190326 3.01108 0.529112L6.23642 3.83246L8 5.56365L9.76358 3.83246L12.9889 0.529113C13.3197 0.190326 13.7683 -9.75486e-08 14.2362 -7.71003e-08C14.704 -5.6652e-08 15.1526 0.190327 15.4834 0.529113C15.8142 0.8679 16 1.32739 16 1.80651Z"
+                                                        fill="currentColor" />
+                                                </svg>
+                                                Variations
+                                            </div>
+                                        </button>
+                                        <div id="createProductVariationItems" class="variation-list" hidden></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="input-block">
+                                <p class="title">Visibility</p>
+                                <div class="input-group">
+                                    <div class="wrapper grid toggle-grid">
+                                        <label class="callout-toggle" for="productVisibilityPOSToggle">
+                                            <span>POS Enabled</span>
+                                            <span class="toggle-wrapper">
+                                                <input id="productVisibilityPOSToggle" class="toggle-input"
+                                                    type="checkbox" role="switch" aria-label="POS Enabled" checked>
+                                                <span class="toggle-control" aria-hidden="true"></span>
+                                            </span>
+                                        </label>
+                                        <label class="callout-toggle" for="productVisibilityOnlineToggle">
+                                            <span>Online Enabled</span>
+                                            <span class="toggle-wrapper">
+                                                <input id="productVisibilityOnlineToggle" class="toggle-input"
+                                                    type="checkbox" role="switch" aria-label="Online Enabled" checked>
+                                                <span class="toggle-control" aria-hidden="true"></span>
+                                            </span>
+                                        </label>
+                                        <label class="callout-toggle" for="productVisibilityArchiveToggle">
+                                            <span>Archive Product & Variations</span>
+                                            <span class="toggle-wrapper">
+                                                <input id="productVisibilityArchiveToggle" class="toggle-input"
+                                                    type="checkbox" role="switch"
+                                                    aria-label="Archive Product and Variations">
+                                                <span class="toggle-control" aria-hidden="true"></span>
+                                            </span>
+                                        </label>
+                                        <label class="callout-toggle" for="productVisibilityRestockToggle">
+                                            <span>Stop Re-Stock</span>
+                                            <span class="toggle-wrapper">
+                                                <input id="productVisibilityRestockToggle" class="toggle-input"
+                                                    type="checkbox" role="switch" aria-label="Stop Re-Stock">
+                                                <span class="toggle-control" aria-hidden="true"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="input-block">
+                                <p class="title"></p>
+                                <div class="input-group">
+                                    <div style="
+                                    display: flex; 
+                                    flex-direction: row;
+                                    align-items: center; 
+                                    gap: 12px; 
+                                    max-width: 767px;">
+                                        <button class="action nonprefer fill panel-delete-action" type="button" hidden>
+                                            <svg viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 1H10C10 0.447715 9.55228 0 9 0H5C4.44772 0 4 0.447715 4 1Z"
+                                                    fill="currentColor" />
+                                                <path
+                                                    d="M0 1.5C0 1.22386 0.223858 1 0.5 1H13.5C13.7761 1 14 1.22386 14 1.5C14 1.77614 13.7761 2 13.5 2H0.5C0.223857 2 0 1.77614 0 1.5Z"
+                                                    fill="currentColor" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M12.0703 15.0771C12.0303 15.5981 11.5958 16.0009 11.0732 16.001H2.93555C2.40894 16.001 1.97234 15.5919 1.9375 15.0664L1.07129 2H13.0713L12.0703 15.0771ZM5.5 5C5.22386 5 5 5.22386 5 5.5V10.5C5 10.7761 5.22386 11 5.5 11C5.77614 11 6 10.7761 6 10.5V5.5C6 5.22386 5.77614 5 5.5 5ZM8.5 5C8.22386 5 8 5.22386 8 5.5V10.5C8 10.7761 8.22386 11 8.5 11C8.77614 11 9 10.7761 9 10.5V5.5C9 5.22386 8.77614 5 8.5 5Z"
+                                                    fill="currentColor" />
+                                            </svg>
+
+                                            Draft Changes
+                                        </button>
+                                        <button class="action prefer fill" type="button">
+                                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16V14.9565C11.842 14.9565 14.9565 11.842 14.9565 8C14.9565 4.15802 11.842 1.04348 8 1.04348C4.15802 1.04348 1.04348 4.15802 1.04348 8C1.04348 11.842 4.15802 14.9565 8 14.9565V16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0Z"
+                                                    fill="currentColor" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M8 14.9565C11.842 14.9565 14.9565 11.842 14.9565 8C14.9565 4.15802 11.842 1.04348 8 1.04348C4.15802 1.04348 1.04348 4.15802 1.04348 8C1.04348 11.842 4.15802 14.9565 8 14.9565ZM7.41249 4.54499V6.58992L6.64262 5.92602C6.52704 5.82684 6.37556 5.77536 6.22087 5.78268C6.06618 5.79001 5.92068 5.85555 5.81579 5.96517C5.76418 6.0192 5.72425 6.08257 5.69833 6.15158C5.67241 6.22059 5.66101 6.29387 5.66479 6.36716C5.66858 6.44045 5.68747 6.51228 5.72038 6.57848C5.75329 6.64468 5.79955 6.70393 5.85648 6.75277L7.60211 8.25672C7.70994 8.35161 7.85054 8.40462 7.99668 8.40548C8.14282 8.40635 8.28409 8.35502 8.39313 8.26142L10.1445 6.75277C10.2014 6.70393 10.2476 6.64468 10.2806 6.57848C10.3135 6.51228 10.3324 6.44045 10.3361 6.36716C10.3399 6.29387 10.3285 6.22059 10.3026 6.15158C10.2767 6.08257 10.2368 6.0192 10.1851 5.96517C10.0803 5.85555 9.93476 5.79001 9.78007 5.78268C9.62537 5.77536 9.47389 5.82684 9.35831 5.92602L8.58845 6.58992V4.54499C8.58279 4.39861 8.51836 4.26005 8.40871 4.15841C8.29906 4.05678 8.15273 4 8.00047 4C7.84821 4 7.70187 4.05678 7.59222 4.15841C7.48257 4.26005 7.41815 4.39861 7.41249 4.54499ZM3.01121 7.64144C2.9962 7.7143 2.99626 7.78929 3.01139 7.86214V7.85979L3.06673 8.12363C3.45247 9.99476 3.67058 11 6.47253 11L9.69361 11C12.3776 11 12.5875 9.92116 12.9342 8.13459L12.9895 7.85744C13.0188 7.71033 12.9861 7.55807 12.8986 7.43415C12.8112 7.31023 12.6762 7.22481 12.5232 7.19667C12.3703 7.16854 12.212 7.19999 12.0832 7.28412C11.9544 7.36825 11.8656 7.49816 11.8364 7.64527L11.781 7.92947C11.5458 9.13983 11.4026 9.87106 9.69361 9.87106H6.47253C4.63332 9.87106 4.48276 9.18446 4.21909 7.90598L4.16456 7.64058C4.14944 7.56773 4.11955 7.49847 4.0766 7.43674C4.03365 7.37501 3.97849 7.32202 3.91425 7.2808C3.85002 7.23958 3.77798 7.21094 3.70223 7.1965C3.62649 7.18207 3.54854 7.18212 3.47282 7.19667C3.3971 7.21122 3.3251 7.23997 3.26093 7.28129C3.19677 7.3226 3.14169 7.37567 3.09884 7.43747C3.05599 7.49926 3.02621 7.56857 3.01121 7.64144Z"
+                                                    fill="currentColor" />
+                                            </svg>
+
+                                            Create Product
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <section id="invoicesView" class="section content-wrapper">
+                <div class="container">
+                    <div id="invoicesContent" class="section content">
+
+                        <div id="invoicesToolbarContent" class="toolbar content-wrapper">
+                            <div class="toolbar group">
+
+                                <button id="createinvoiceButton" class="toolbar button accent-filled">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8 0C8.82843 0 9.5 0.671573 9.5 1.5V6.5H14.5C15.3284 6.5 16 7.17157 16 8C16 8.82843 15.3284 9.5 14.5 9.5H9.5V14.5C9.5 15.3284 8.82843 16 8 16C7.17157 16 6.5 15.3284 6.5 14.5V9.5H1.5C0.671573 9.5 0 8.82843 0 8C0 7.17157 0.671573 6.5 1.5 6.5H6.5V1.5C6.5 0.671573 7.17157 0 8 0Z"
+                                                fill="currentColor" />
+                                        </svg>
+
+                                    </div>
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="ui/scripts/dashboard.js"></script>
+    <script type="module" src="ui/scripts/modules.js"></script>
+
+</body>
+
+</html>

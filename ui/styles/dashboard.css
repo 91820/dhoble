@@ -1,0 +1,175 @@
+.section.content-wrapper {
+    background-image: url('/ui/assets/waveRepeat.svg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: calc(100vh - 67px);
+}
+
+#cardContent.section.content {
+    padding: 12px;
+}
+
+.card {
+    overflow: hidden;
+}
+
+.card .title-wrapper {
+    padding: 24px;
+}
+
+.card .title-wrapper .title {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.card .title-wrapper .subtitle {
+    font-size: 14px;
+    color: var(--secondaryText);
+}
+
+.card .title-wrapper svg {
+    width: 64px;
+    height: 64px;
+    color: var(--primaryAccent);
+    margin-bottom: 12px;
+}
+
+/* FINDER */
+
+#finderToolbarContent.toolbar.content-wrapper {
+    display: flex;
+    justify-content: flex-end !important;
+}
+
+#filesCard.card {
+    grid-column: span 2;
+}
+
+#filesCard.card .recent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid var(--primaryBorder);
+    padding: 24px 0px 0px 0px;
+}
+
+#filesCard.card .recent .callout {
+    padding-left: 24px;
+}
+
+#filesCard.card .recent .list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 0px 24px 24px 24px;
+}
+
+#filesCard.card .recent .list .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+    border-radius: 12px;
+    background-color: var(--cardBackground);
+}
+
+#filesCard.card .recent .list .item .details .title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#filesCard.card .recent .list .item .details .subtitle {
+    font-size: 12px;
+    color: var(--secondaryText);
+}
+
+#filesCard.card .recent .list .item .preview {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--secondaryBorder);
+}
+
+#finderContent.section.content .list-wrapper {
+    padding: 12px;
+    margin-top: -12px;
+}
+
+#finderContent.section.content .list-wrapper .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 6px;
+
+    border-radius: 12px;
+    background-color: var(--bodyBackground);
+    border: 1px solid var(--primaryBorder);
+    padding: 24px;
+    box-shadow: 0px 6px 12px var(--bodyBackground);
+}
+
+@media screen and (max-width: 716px) {
+    #finderContent.section.content .list-wrapper .list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 554px) {
+    #finderContent.section.content .list-wrapper .list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+#finderContent.section.content .list-wrapper .list .item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    min-width: 156px;
+
+    padding: 12px;
+    border-radius: 12px;
+    background-color: var(--cardBackground);
+}
+
+#finderContent.section.content .list-wrapper .list .item .details .title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#finderContent.section.content .list-wrapper .list .item .details .subtitle {
+    font-size: 12px;
+    color: var(--secondaryText);
+}
+
+#finderContent.section.content .list-wrapper .list .item .preview {
+    width: 100%;
+    height: 100%;
+    min-width: 72px;
+    min-height: 72px;
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    border: 1px solid var(--secondaryBorder);
+}
+
+/* BOOK MARKS */
+
+#bookmarkToolbarContent.toolbar.content-wrapper {
+    display: flex;
+    justify-content: flex-end !important;
+}
+
+/* INVOICES */
+
+#invoicesToolbarContent.toolbar.content-wrapper {
+    display: flex;
+    justify-content: flex-end !important;
+}

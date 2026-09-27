@@ -1,0 +1,234 @@
+:root {
+    --bodyBackground: #0D0E14;
+    --cardBackground: #1c1c1e;
+    --sectionBackground: #2c2c2e;
+
+    --primaryAccent: #767076;
+    --tintAccent: #D6D0D6;
+    --focusAccent: #7E787E;
+
+    --primaryBorder: #3c3c3e;
+    --secondaryBorder: #2c2c2e;
+
+    --primaryText: #e5e5ea;
+    --secondaryText: rgba(230, 230, 235, 0.5);
+    --focusText: #ffffff;
+
+    --primaryTextAlt: #3c3c3e;
+    --focusTextAlt: #000000;
+
+    --primaryWarning: #D14747;
+    --tintWarning: #FFF4F4;
+    --primaryConfirm: #2EC04F;
+    --tintConfirm: #DDFFFF;
+
+    --toolbarButtonBackground: rgba(14, 14, 15, 0.85);
+    --toolbarButtonBackgroundHover: rgba(0, 0, 0, 1);
+    --toolbarButtonInsetBackground: #373738;
+    --toolbarButtonInsetBackgroundHover: #3c3c3e;
+    --toolbarButtonBorder: linear-gradient(145deg,
+            var(--toolbarButtonBorder1),
+            var(--toolbarButtonBorder2),
+            var(--toolbarButtonBorder3),
+            var(--toolbarButtonBorder4));
+
+    --toolbarButtonBorder1: rgba(249, 249, 249, 0.15);
+    --toolbarButtonBorder2: rgba(168, 168, 168, 0.3) 38%;
+    --toolbarButtonBorder3: rgba(168, 168, 168, 0.1) 58%;
+    --toolbarButtonBorder4: rgba(249, 249, 249, 0.3);
+
+    --toolbarText: rgba(242, 242, 247, 0.75);
+    --toolbarTextFocus: #fff;
+    --toolbarTextDisabled: rgba(242, 242, 247, 0.5);
+
+    --toolbarButtonBorderWidth: 1.25px;
+    --toolbarButtonMinSize: 42px;
+    --toolbarButtonBorderRadius: 999px;
+
+    --toolbarResultsMaxHeight: 520px;
+    --toolbarResultsBorderRadius: 18px;
+
+    --primaryInteraction: 0.5s cubic-bezier(0.00, 1.02, 0.43, 0.96);
+}
+
+* {
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbarTrack) var(--scrollbarBackground);
+}
+
+body {
+    background-color: var(--bodyBackground);
+    color: var(--primaryText);
+
+    margin: 0;
+
+    font-family: 'Sunghyun Sans KR', 'Sunghyun Sans', sans-serif;
+    font-size: 16px;
+}
+
+h1,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 478px) {
+    .container {
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .container {
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .container {
+        max-width: 927px;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .container {
+        width: 75%;
+        min-width: 927px;
+        max-width: 1068px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        min-width: 1068px;
+        max-width: 1440px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .container {
+        min-width: 1280px;
+        max-width: 1440px;
+    }
+}
+
+.action-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+    row-gap: 0px;
+    margin-top: 24px;
+}
+
+.action {
+    margin-top: 12px;
+    padding: 12px 32px;
+    gap: 6px;
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 767px) {
+    .action {
+        font-size: 14px;
+        min-width: 30px;
+        padding: 7px 15px;
+        line-height: 1.43;
+    }
+}
+
+.action svg {
+    width: 14px;
+    height: 14px;
+}
+
+.action.prefer {
+    background-color: var(--primaryAccent);
+    color: var(--tintAccent);
+}
+
+.action.prefer:hover {
+    background-color: var(--focusAccent);
+    color: var(--tintAccent);
+}
+
+.action.secondary.prefer {
+    background-color: var(--primaryText);
+    color: var(--primaryTextAlt);
+}
+
+.action.alternative {
+    background-color: transparent;
+    color: var(--primaryAccent);
+    border: 1px solid var(--primaryAccent);
+}
+
+.action.nonprefer {
+    background-color: var(--sectionInsetBackground);
+    color: var(--primaryWarning);
+}
+
+.action.nuetral {
+    background-color: #333333;
+    color: var(--primaryText);
+}
+
+.action.prefer.fill,
+.action.nonprefer.fill,
+.action.alternative,
+.action.nuetral.fill {
+    width: 100%;
+}
+
+
+.callout {
+    font-size: 14px;
+    font-weight: 900;
+    max-width: 80%;
+    text-transform: uppercase;
+
+    color: var(--primaryAccent);
+}

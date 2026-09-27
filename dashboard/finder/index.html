@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dhoble</title>
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-dynamic-subset.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-kr-dynamic-subset.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
+    <base href="/">
+
+    <link rel="stylesheet" href="ui/styles/global.css">
+    <link rel="stylesheet" href="ui/styles/toolbar.css">
+    <link rel="stylesheet" href="ui/styles/popup.css">
+    <link rel="stylesheet" href="ui/styles/header.css">
+    <link rel="stylesheet" href="ui/styles/components.css">
+
+    <link rel="stylesheet" href="ui/styles/dashboard.css">
+
+    <link rel="icon" type="image/png" href="/ui/assets/AppClip.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="/ui/assets/AppClip.png">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <main class="layout content-wrapper">
+
+        <div data-module="header"></div>
+
+        <div class="page content-wrapper">
+
+            <section id="finderView" class="section content-wrapper">
+                <div class="container">
+                    <div id="finderContent" class="section content">
+
+                        <div id="finderToolbarContent" class="toolbar content-wrapper">
+                            <div class="toolbar group">
+                                <button id="exportProductsButton" class="toolbar button">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.05998 3.11241L7.05998 6.61801C7.06904 6.86894 7.17212 7.10648 7.34756 7.28071C7.52299 7.45493 7.75713 7.55228 8.00075 7.55228C8.24437 7.55228 8.4785 7.45493 8.65394 7.28071C8.82937 7.10648 8.93246 6.86894 8.94151 6.61801L8.94151 3.11241L10.1733 4.25052C10.3582 4.42054 10.6006 4.5088 10.8481 4.49625C11.0956 4.48369 11.3284 4.37133 11.4962 4.18341C11.5788 4.09079 11.6427 3.98216 11.6842 3.86386C11.7256 3.74555 11.7439 3.61992 11.7378 3.49429C11.7318 3.36865 11.7015 3.24551 11.6489 3.13202C11.5962 3.01854 11.5222 2.91698 11.4311 2.83325L8.62901 0.246993C8.45454 0.0865375 8.22851 -0.00146946 7.99469 1.82073e-05C7.76087 0.00150588 7.5359 0.0923819 7.36337 0.255045L4.57036 2.83325C4.47928 2.91698 4.40526 3.01854 4.35261 3.13202C4.29996 3.24551 4.26972 3.36865 4.26367 3.49429C4.25761 3.61992 4.27585 3.74555 4.31732 3.86386C4.3588 3.98216 4.42268 4.09079 4.50526 4.18341C4.67309 4.37133 4.90588 4.48369 5.15339 4.49625C5.40089 4.5088 5.64327 4.42054 5.82819 4.25052L7.05998 3.11241ZM0.0182178 6.62081C-0.00597791 6.49593 -0.00607518 6.36737 0.0179336 6.24246C0.0419414 6.11755 0.0895831 5.99874 0.15814 5.8928C0.226697 5.78687 0.314826 5.69589 0.417494 5.62507C0.520161 5.55424 0.63536 5.50495 0.756509 5.48001C0.877659 5.45507 1.00239 5.45497 1.12357 5.47971C1.24476 5.50446 1.36003 5.55357 1.46281 5.62423C1.56558 5.69489 1.65385 5.78573 1.72256 5.89155C1.79128 5.99738 1.8391 6.11611 1.86329 6.24099L1.95053 6.69596C2.37242 8.88764 2.6133 10.0647 5.55605 10.0647L10.7098 10.0647C13.4442 10.0647 13.6733 8.81114 14.0497 6.73623L14.1382 6.24904C14.185 5.99685 14.3271 5.77415 14.5332 5.62993C14.7393 5.4857 14.9925 5.43178 15.2372 5.48001C15.4818 5.52824 15.6979 5.67468 15.8378 5.88711C15.9778 6.09954 16.0301 6.36056 15.9833 6.61275L15.8947 7.08786C15.34 10.1506 15.0041 12 10.7098 12L5.55605 12C1.07292 12 0.723957 10.2767 0.106761 7.06907L0.0182178 6.61678L0.0182178 6.62081Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <button id="openImportProductsPanel" class="toolbar button">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.05998 4.43987L7.05998 0.934267C7.06904 0.683335 7.17212 0.445794 7.34756 0.271568C7.523 0.0973421 7.75713 -3.60307e-07 8.00075 -3.49658e-07C8.24437 -3.3901e-07 8.4785 0.0973421 8.65394 0.271568C8.82938 0.445794 8.93246 0.683335 8.94152 0.934267L8.94152 4.43987L10.1733 3.30176C10.3582 3.13173 10.6006 3.04347 10.8481 3.05603C11.0956 3.06858 11.3284 3.18095 11.4962 3.36886C11.5788 3.46149 11.6427 3.57011 11.6842 3.68842C11.7256 3.80673 11.7439 3.93235 11.7378 4.05799C11.7318 4.18363 11.7015 4.30677 11.6489 4.42025C11.5962 4.53374 11.5222 4.6353 11.4311 4.71903L8.62901 7.30528C8.45454 7.46574 8.22851 7.55375 7.99469 7.55226C7.76087 7.55077 7.5359 7.45989 7.36337 7.29723L4.57036 4.71903C4.47928 4.6353 4.40526 4.53374 4.35261 4.42025C4.29996 4.30677 4.26972 4.18363 4.26367 4.05799C4.25761 3.93235 4.27585 3.80673 4.31732 3.68842C4.3588 3.57011 4.42268 3.46149 4.50526 3.36886C4.67309 3.18095 4.90589 3.06858 5.15339 3.05603C5.4009 3.04347 5.64327 3.13173 5.82819 3.30176L7.05998 4.43987ZM0.0182197 6.62081C-0.00597601 6.49593 -0.00607328 6.36737 0.0179355 6.24246C0.0419433 6.11755 0.089586 5.99874 0.158142 5.8928C0.226699 5.78687 0.314828 5.69589 0.417495 5.62507C0.520163 5.55424 0.63536 5.50495 0.75651 5.48001C0.87766 5.45507 1.00239 5.45497 1.12358 5.47971C1.24476 5.50446 1.36003 5.55357 1.46281 5.62423C1.56558 5.69489 1.65385 5.78573 1.72256 5.89155C1.79128 5.99738 1.8391 6.11611 1.8633 6.24099L1.95054 6.69596C2.37242 8.88764 2.61331 10.0647 5.55605 10.0647L10.7098 10.0647C13.4442 10.0647 13.6733 8.81114 14.0497 6.73623L14.1382 6.24904C14.185 5.99685 14.3271 5.77415 14.5332 5.62993C14.7393 5.4857 14.9925 5.43178 15.2372 5.48001C15.4818 5.52824 15.6979 5.67468 15.8378 5.88711C15.9778 6.09954 16.0301 6.36056 15.9833 6.61275L15.8947 7.08786C15.34 10.1506 15.0041 12 10.7098 12L5.55605 12C1.07292 12 0.723958 10.2767 0.106763 7.06907L0.0182197 6.61678L0.0182197 6.62081Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <button id="openBulkCreateProductPanel" class="toolbar button accent">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M11 0C12.1046 0 13 0.895431 13 2H11.75C11.75 1.58579 11.4142 1.25 11 1.25H2C1.58579 1.25 1.25 1.58579 1.25 2V11C1.25 11.4142 1.58579 11.75 2 11.75V13L1.7959 12.9893C0.787223 12.887 0 12.0357 0 11V2C0 0.895431 0.895431 0 2 0H11Z"
+                                                fill="currentColor" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M16 4C16 2.89543 15.1046 2 14 2H13H11.75H4C2.89543 2 2 2.89543 2 4V11.75V13V14C2 15.0357 2.78722 15.887 3.7959 15.9893L4 16H14C15.1046 16 16 15.1046 16 14V4ZM14.75 14C14.75 14.4142 14.4142 14.75 14 14.75H4C3.58579 14.75 3.25 14.4142 3.25 14V4C3.25 3.58579 3.58579 3.25 4 3.25H14C14.4142 3.25 14.75 3.58579 14.75 4V14Z"
+                                                fill="currentColor" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M14 14.75C14.4142 14.75 14.75 14.4142 14.75 14V4C14.75 3.58579 14.4142 3.25 14 3.25H4C3.58579 3.25 3.25 3.58579 3.25 4V14C3.25 14.4142 3.58579 14.75 4 14.75H14ZM9.57143 9.57143H12.4286C12.5801 9.57143 12.7255 9.51122 12.8326 9.40406C12.9398 9.2969 13 9.15155 13 9C13 8.84845 12.9398 8.7031 12.8326 8.59594C12.7255 8.48878 12.5801 8.42857 12.4286 8.42857H9.57143V5.57143C9.57143 5.41988 9.51122 5.27453 9.40406 5.16737C9.2969 5.0602 9.15155 5 9 5C8.84845 5 8.7031 5.0602 8.59594 5.16737C8.48878 5.27453 8.42857 5.41988 8.42857 5.57143V8.42857H5.57143C5.41988 8.42857 5.27453 8.48878 5.16737 8.59594C5.0602 8.7031 5 8.84845 5 9C5 9.15155 5.0602 9.2969 5.16737 9.40406C5.27453 9.51122 5.41988 9.57143 5.57143 9.57143H8.42857V12.4286C8.42857 12.5801 8.48878 12.7255 8.59594 12.8326C8.7031 12.9398 8.84845 13 9 13C9.15155 13 9.2969 12.9398 9.40406 12.8326C9.51122 12.7255 9.57143 12.5801 9.57143 12.4286V9.57143Z"
+                                                fill="currentColor" />
+                                        </svg>
+
+                                    </div>
+                                </button>
+                                <button id="createProductButton" class="toolbar button accent-filled">
+                                    <div class="icon">
+                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8 0C8.82843 0 9.5 0.671573 9.5 1.5V6.5H14.5C15.3284 6.5 16 7.17157 16 8C16 8.82843 15.3284 9.5 14.5 9.5H9.5V14.5C9.5 15.3284 8.82843 16 8 16C7.17157 16 6.5 15.3284 6.5 14.5V9.5H1.5C0.671573 9.5 0 8.82843 0 8C0 7.17157 0.671573 6.5 1.5 6.5H6.5V1.5C6.5 0.671573 7.17157 0 8 0Z"
+                                                fill="currentColor" />
+                                        </svg>
+
+                                    </div>
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div class="list-wrapper">
+                            <div class="list">
+                                <div class="item">
+                                    <img class="preview" src="/ui/assets/Missing Image Card.png">
+                                    <div class="details">
+                                        <p class="title">fileName.png</p>
+                                        <p class="subtitle">
+                                            123.2kb
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img class="preview" src="/ui/assets/Missing Image Card.png">
+                                    <div class="details">
+                                        <p class="title">fileName.png</p>
+                                        <p class="subtitle">
+                                            123.2kb
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img class="preview" src="/ui/assets/Missing Image Card.png">
+                                    <div class="details">
+                                        <p class="title">fileName.png</p>
+                                        <p class="subtitle">
+                                            123.2kb
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img class="preview" src="/ui/assets/Missing Image Card.png">
+                                    <div class="details">
+                                        <p class="title">fileName.png</p>
+                                        <p class="subtitle">
+                                            123.2kb
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="ui/scripts/dashboard.js"></script>
+    <script type="module" src="ui/scripts/modules.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+.header.content-wrapper {
+    background: var(--bodyBackground);
+    padding: 12px;
+    border-bottom: 1px solid var(--primaryBorder);
+}
+
+.header.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.header.content .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    min-width: 32px;
+    height: 42px;
+}
+
+.header.content .logo-wrapper svg, .logo-wrapper img {
+    height: 42px;
+}
+
+.header.content .logo-wrapper .base {
+    position: absolute;
+    z-index: 1;
+}
+
+.header.content .logo-wrapper .cover {
+    position: absolute;
+    z-index: 2;
+    mix-blend-mode: exclusion;
+}
+
+.header.content .logo-wrapper .rainbow {
+    position: absolute;
+    z-index: 3;
+    mix-blend-mode: exclusion;
+    color: red;
+    animation: rainbowLoop 5s linear infinite;
+}
+
+@keyframes rainbowLoop {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.header.content .logo-wrapper .white {
+    position: absolute;
+    z-index: 4;
+    mix-blend-mode: overlay;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.header.content .logo-wrapper .monogram {
+    position: absolute;
+    z-index: 5;
+    mix-blend-mode: overlay;
+    opacity: 0.75;
+}
+
+.header.content .toolbar.input-wrapper, header.content .toolbar.input {
+    width: 100%;
+}
+
+#headerSearchWrapper.toolbar.group {
+    width: 100%;
+    max-width: 512px;
+}

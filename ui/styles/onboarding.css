@@ -1,0 +1,97 @@
+#onboardingView.section.content-wrapper {
+    background-image: url('/ui/assets/waveRepeat.svg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#onboardingContent.section.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    max-width: 64px;
+    height: 85px;
+}
+
+.logo-wrapper svg, .logo-wrapper img {
+    width: 64px;
+}
+
+.logo-wrapper .base {
+    position: absolute;
+    z-index: 1;
+}
+
+.logo-wrapper .cover {
+    position: absolute;
+    z-index: 2;
+    mix-blend-mode: exclusion;
+}
+
+.logo-wrapper .rainbow {
+    position: absolute;
+    z-index: 3;
+    mix-blend-mode: exclusion;
+    color: red;
+    animation: rainbowLoop 5s linear infinite;
+}
+
+@keyframes rainbowLoop {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.logo-wrapper .white {
+    position: absolute;
+    z-index: 4;
+    mix-blend-mode: overlay;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.logo-wrapper .monogram {
+    position: absolute;
+    z-index: 5;
+    mix-blend-mode: overlay;
+    opacity: 0.75;
+}
+
+#onboardingForm.block .title {
+    margin-top: 48px;
+    margin-bottom: 12px;
+    margin-left: 12px;
+
+}
+
+.field-error,
+.form-error {
+    margin: 6px 12px 0;
+    color: var(--primaryWarning);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.field-error[hidden],
+.form-error[hidden] {
+    display: none;
+}
+
+.form-error {
+    max-width: 420px;
+    text-align: center;
+}

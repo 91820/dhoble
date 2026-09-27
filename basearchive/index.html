@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dhoble</title>
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-dynamic-subset.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/anaclumos/sunghyun-sans@v1.0.2/dist/web/css/sunghyun-sans-kr-dynamic-subset.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+
+    <base href="/">
+
+    <link rel="stylesheet" href="ui/styles/global.css">
+    <link rel="stylesheet" href="ui/styles/toolbar.css">
+    <link rel="stylesheet" href="ui/styles/popup.css">
+    <link rel="stylesheet" href="ui/styles/header.css">
+    <link rel="stylesheet" href="ui/styles/components.css">
+
+    <link rel="stylesheet" href="ui/styles/dashboard.css">
+
+    <link rel="icon" type="image/png" href="/ui/assets/AppClip.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="/ui/assets/AppClip.png">
+
+    <style>
+        #ba-Content.section.content {
+            background-image: url('ui/assets/baseArchive-splashBackgroundAlt-Dark-1024@1x.png');
+            background-size: cover;
+            background-position: right;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .ba-title-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            gap: 12px;
+            margin-bottom: 12px;
+
+        }
+
+        .ba-app-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 1rem;
+            border-radius: 24px;
+            corner-shape: squircle;
+        }
+
+        #ba-download-button.action.accent.fill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        #ba-download-button.action.accent.fill svg {
+            margin-top: -2px;
+        }
+
+        .ba-subtitle-wrapper {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="layout content-wrapper">
+
+        <div class="page content-wrapper">
+
+            <section id="ba-View" class="section content-wrapper">
+                <div class="container">
+                    <div id="ba-Content" class="section content">
+
+                        <div class="ba-title-wrapper">
+                            <img class="ba-app-icon" src="ui/assets/baseArchive-AppIcon-Light-512@1x.png"
+                                alt="Base Archive Logo">
+                            <h1>Base Archive</h1>
+                        </div>
+
+                        <button id="ba-download-button" class="action accent fill">
+                            <svg viewBox="0 0 541 667" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M494.854 583.333C467.187 624.667 437.854 665 393.187 665.667C348.521 666.667 334.187 639.333 283.521 639.333C232.521 639.333 216.854 665 174.52 666.667C130.853 668.333 97.853 622.667 69.853 582.333C12.853 500 -30.8137 348.333 27.853 246.333C56.853 195.667 108.853 163.667 165.186 162.667C207.854 162 248.521 191.667 274.854 191.667C300.854 191.667 350.187 156 401.854 161.333C423.521 162.333 484.187 170 523.187 227.333C520.187 229.333 450.854 270 451.521 354.333C452.521 455 539.854 488.667 540.854 489C539.854 491.333 526.854 537 494.854 583.333ZM304.521 50C328.854 22.3333 369.187 1.33333 402.521 0C406.854 39 391.187 78.3333 367.854 106.333C344.854 134.667 306.854 156.667 269.521 153.667C264.521 115.333 283.187 75.3333 304.521 50Z"
+                                    fill="currentColor" />
+                            </svg>
+
+                            Download for macOS
+                        </button>
+
+                        <div class="ba-subtitle-wrapper">
+                            <p>requires macOS Tahoe 26.2+</p>
+                        </div>
+
+                    </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="ui/scripts/-dashboard.js"></script>
+    <script type="module" src="ui/scripts/-modules.js"></script>
+
+</body>
+
+</html>
